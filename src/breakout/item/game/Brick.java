@@ -1,4 +1,6 @@
-package breakout.item;
+package breakout.item.game;
+
+import breakout.item.GameItem;
 
 import java.awt.*;
 
@@ -17,7 +19,7 @@ public class Brick extends GameItem {
 
     @Override
     public void paint(Graphics g) {
-        g.setColor(Color.BLUE);
+        g.setColor(Color.GREEN);
         g.fillRect(x, y, width, height);
     }
 

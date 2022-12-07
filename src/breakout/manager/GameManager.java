@@ -1,9 +1,11 @@
-package breakout;
+package breakout.manager;
 
+import breakout.graphics.Gui;
 import breakout.item.game.Ball;
 import breakout.item.game.Brick;
 import breakout.item.game.Paddle;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,16 +18,19 @@ public class GameManager {
 
     public GameManager() {
 
-        ball = new Ball(20, 20, Gui.WIDTH / 2, Gui.HEIGHT / 2, 4);
-        paddle = new Paddle(200, 75, Gui.WIDTH / 2 - 1 - 100, Gui.HEIGHT - 10, 10);
+        paddle = new Paddle(300, 50, Gui.WIDTH / 2 - 1 - 100, Gui.HEIGHT - 70, 10);
+        ball = new Ball(this, 20, 20, Gui.WIDTH / 2, Gui.HEIGHT / 2, 3);
 
-        for (int i = 0; i < 10; i++) {
-            bricks.add(new Brick(50, i*5+20, i%5));
+        int side = 50;
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 6; j++) {
+                bricks.add(new Brick(side, j * 90 + 30, i * 60 + 30));
+            }
+
         }
-
     }
 
-    public void start() {
+    public void start(Component component) {
         thread = new Thread(() -> {
             while (true) {
 
@@ -37,7 +42,7 @@ public class GameManager {
                     e.printStackTrace();
                 }
 
-
+                component.repaint();
             }
         });
         thread.start();
@@ -46,7 +51,6 @@ public class GameManager {
     public void stop() {
         thread.interrupt();
     }
-
 
     public List<Brick> getBricks() {
         return bricks;

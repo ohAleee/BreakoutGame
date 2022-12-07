@@ -1,4 +1,6 @@
-package breakout;
+package breakout.graphics;
+
+import breakout.manager.GameManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +10,6 @@ public class GamePanel extends JPanel {
     private final GameManager manager;
 
     public GamePanel(GameManager manager) {
-        super();
         this.manager = manager;
     }
 
