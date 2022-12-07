@@ -1,6 +1,7 @@
 package breakout.graphics;
 
 import breakout.manager.GameManager;
+import breakout.manager.ItemManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,31 +16,37 @@ public class Gui extends JFrame {
     public Gui() {
         super("Breakout");
 
-        GameManager manager = new GameManager();
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setLayout(null);
         setLocationRelativeTo(null);
 
-        GamePanel panel = new GamePanel(manager);
+        ItemManager items = new ItemManager();
+        GameManager game = new GameManager(items);
+        items.setGameManager(game);
+
+        GamePanel panel = new GamePanel(items);
         panel.setBackground(Color.GRAY);
-        panel.setSize(new Dimension(WIDTH, HEIGHT));
+        panel.setSize(getMaximumSize());
         panel.setFocusable(true);
         panel.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
-                    case KeyEvent.VK_LEFT -> manager.getPaddle().move(false);
-                    case KeyEvent.VK_RIGHT -> manager.getPaddle().move(true);
+                    case KeyEvent.VK_SPACE -> {
+                        if (game.isRunning()) game.reset();
+                        else game.start();
+                    }
+                    case KeyEvent.VK_LEFT -> items.getPaddle().move(false);
+                    case KeyEvent.VK_RIGHT -> items.getPaddle().move(true);
                 }
             }
         });
         add(panel);
 
-        setVisible(true);
+        game.initThread(panel);
 
-        manager.start(panel);
+        setVisible(true);
     }
 
 }

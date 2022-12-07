@@ -1,25 +1,25 @@
 package breakout.graphics;
 
-import breakout.manager.GameManager;
+import breakout.manager.ItemManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
 
-    private final GameManager manager;
+    private final ItemManager items;
 
-    public GamePanel(GameManager manager) {
-        this.manager = manager;
+    public GamePanel(ItemManager items) {
+        this.items = items;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        manager.getBall().paint(g);
-        manager.getPaddle().paint(g);
-        manager.getBricks().forEach(brick -> brick.paint(g));
+        items.getBall().paint(g);
+        items.getPaddle().paint(g);
+        items.getBricks().forEach(brick -> brick.paint(g));
     }
 
 }

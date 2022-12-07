@@ -2,16 +2,16 @@ package breakout.item.game;
 
 import breakout.graphics.Gui;
 import breakout.item.MovableItem;
-import breakout.manager.GameManager;
+import breakout.manager.ItemManager;
 
 import java.awt.*;
 
 public class Ball extends MovableItem {
 
-    private final GameManager manager;
+    private final ItemManager manager;
 
-    public Ball(GameManager manager, int width, int height, int x, int y, int v) {
-        super(width, height, x, y, v, v);
+    public Ball(ItemManager manager, int width, int height, int x, int y, int v) {
+        super(width, height, x, y, v, -v);
         this.manager = manager;
     }
 
@@ -38,7 +38,7 @@ public class Ball extends MovableItem {
         if (!intersects(manager.getPaddle())) {
             if (y + height > Gui.HEIGHT) {
                 remove();
-                System.out.println("Game Over");
+                manager.getGame().reset();
             }
             return;
         }
