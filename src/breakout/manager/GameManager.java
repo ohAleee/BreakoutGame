@@ -37,6 +37,11 @@ public class GameManager {
                 if (!running)
                     return;
 
+                if (items.getBricks().isEmpty()) {
+                    reset();
+                    return;
+                }
+
                 items.getBall().move();
                 panel.repaint();
             }

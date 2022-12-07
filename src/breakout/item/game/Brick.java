@@ -3,24 +3,20 @@ package breakout.item.game;
 import breakout.item.GameItem;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Brick extends GameItem {
 
-    public Brick(int side, int x, int y) {
-        super(side, side, x, y);
-    }
+    private final BufferedImage image;
 
-    @Override
-    public void remove() {
-        super.remove();
-
-        // TODO
+    public Brick(BufferedImage image, int x, int y) {
+        super(image.getWidth(), image.getHeight(), x, y);
+        this.image = image;
     }
 
     @Override
     public void paint(Graphics g) {
-        g.setColor(Color.GREEN);
-        g.fillRect(x, y, width, height);
+        g.drawImage(image, x, y, width, height, null);
     }
 
 }

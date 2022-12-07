@@ -10,9 +10,13 @@ public abstract class GameItem {
     protected int x;
     protected int y;
 
-    public GameItem(int width, int height, int x, int y) {
+    public GameItem(int width, int height) {
         this.width = width;
         this.height = height;
+    }
+
+    public GameItem(int width, int height, int x, int y) {
+        this(width, height);
         this.x = x;
         this.y = y;
     }
@@ -27,6 +31,14 @@ public abstract class GameItem {
     }
 
     public abstract void paint(Graphics g);
+
+    public int getCenterX() {
+        return x + width / 2;
+    }
+
+    public int getCenterY() {
+        return y + width / 2;
+    }
 
     public int getX() {
         return x;

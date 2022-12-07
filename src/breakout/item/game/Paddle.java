@@ -4,16 +4,19 @@ import breakout.graphics.Gui;
 import breakout.item.MovableItem;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Paddle extends MovableItem {
 
-    public Paddle(int width, int height, int x, int y, int v) {
-        super(width, height, x, y, v, v);
+    private final BufferedImage image;
+
+    public Paddle(BufferedImage image, int v) {
+        super(image.getWidth(), image.getHeight(), (Gui.WIDTH - image.getWidth()) / 2, Gui.HEIGHT - image.getHeight() - 5, v, v);
+        this.image = image;
     }
 
     @Override
     public void move() {
-
     }
 
     public void move(boolean right) {
@@ -26,8 +29,7 @@ public class Paddle extends MovableItem {
 
     @Override
     public void paint(Graphics g) {
-        g.setColor(Color.ORANGE);
-        g.fillRoundRect(x, y, width, height, 30, 30);
+        g.drawImage(image, x, y, width, height, null);
     }
 
 }

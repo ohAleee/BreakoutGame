@@ -1,14 +1,20 @@
 package breakout.manager;
 
-import breakout.graphics.Gui;
 import breakout.item.game.Ball;
 import breakout.item.game.Brick;
 import breakout.item.game.Paddle;
+import breakout.util.ImageUtil;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ItemManager {
+
+    public static final BufferedImage PADDLE = ImageUtil.getImage(300, 50, "https://imgur.com/4Hqy72D.png");
+    public static final BufferedImage BALL = ImageUtil.getImage(20, 20, "https://i.imgur.com/irrGXYX.png");
+    public static final BufferedImage BRICK = ImageUtil.getImage(50, 50, "https://i.imgur.com/7mQcvCg.png");
 
     private final List<Brick> bricks = new ArrayList<>();
     private Paddle paddle;
@@ -16,8 +22,10 @@ public class ItemManager {
     private GameManager gameManager;
 
     public void init() {
-        paddle = new Paddle(300, 50, Gui.WIDTH / 2 - 1 - 100, Gui.HEIGHT - 70, 10);
-        ball = new Ball(this, 20, 20, Gui.WIDTH / 2, Gui.HEIGHT / 2, 5);
+        Random random = new Random();
+
+        paddle = new Paddle(PADDLE, 10);
+        ball = new Ball(BALL, this, random.nextInt(3) + 5, -(random.nextInt(5) + 4));
 
         initBricks();
     }
@@ -29,7 +37,7 @@ public class ItemManager {
     private void initBricks() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 6; j++) {
-                bricks.add(new Brick(50, j * 90 + 30, i * 60 + 30));
+                bricks.add(new Brick(BRICK, j * 90 + 30, i * 60 + 30));
             }
         }
     }

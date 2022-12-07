@@ -5,14 +5,17 @@ import breakout.item.MovableItem;
 import breakout.manager.ItemManager;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Ball extends MovableItem {
 
     private final ItemManager manager;
+    private final BufferedImage image;
 
-    public Ball(ItemManager manager, int width, int height, int x, int y, int v) {
-        super(width, height, x, y, v, -v);
+    public Ball(BufferedImage image, ItemManager manager, int vx, int vy) {
+        super(image.getWidth(), image.getHeight(), (Gui.WIDTH - image.getWidth()) / 2, (Gui.HEIGHT - image.getHeight()) / 2, vx, vy);
         this.manager = manager;
+        this.image = image;
     }
 
     @Override
@@ -51,8 +54,7 @@ public class Ball extends MovableItem {
 
     @Override
     public void paint(Graphics g) {
-        g.setColor(Color.PINK);
-        g.fillRoundRect(x, y, width, height, 30, 30);
+        g.drawImage(image, x, y, width, height, null);
     }
 
 }

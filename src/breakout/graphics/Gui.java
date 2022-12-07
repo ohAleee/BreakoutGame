@@ -16,18 +16,18 @@ public class Gui extends JFrame {
     public Gui() {
         super("Breakout");
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(WIDTH, HEIGHT);
-        setLayout(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(WIDTH + 11, HEIGHT + 36);
         setLocationRelativeTo(null);
+        setLayout(null);
 
         ItemManager items = new ItemManager();
         GameManager game = new GameManager(items);
         items.setGameManager(game);
 
         GamePanel panel = new GamePanel(items);
+        panel.setBounds(0, 0, WIDTH, HEIGHT);
         panel.setBackground(Color.GRAY);
-        panel.setSize(getMaximumSize());
         panel.setFocusable(true);
         panel.addKeyListener(new KeyAdapter() {
             @Override
